@@ -127,27 +127,6 @@ class ListDataset(data.Dataset):
     def __len__(self):
         return self.num_samples
 
-
-def test():
-    import torchvision
-
-    transform = transforms.Compose([
-        transforms.ToTensor(),
-        transforms.Normalize((0.485,0.456,0.406), (0.229,0.224,0.225))
-    ])
-    dataset = ListDataset(root="/home/wushuanchen/datasets/xu_tian",
-                          list_file='/home/wushuanchen/PycharmProjects/pytorch-retinanet-master/data/simulate_train.txt', train=True, transform=transform, input_size=600)
-    dataloader = torch.utils.data.DataLoader(dataset, batch_size=8, shuffle=False, num_workers=1, collate_fn=dataset.collate_fn)
-
-    for images, loc_targets, cls_targets,fnames in dataloader:
-        print(images.size())
-        print(loc_targets.size())
-        print(cls_targets.size())
-        grid = torchvision.utils.make_grid(images, 1)
-        torchvision.utils.save_image(grid, 'a.jpg')
-        break
-
-# test()
 import cv2
 import torchvision
 import numpy as np
@@ -156,8 +135,8 @@ transform = transforms.Compose([
     transforms.Normalize((0.485,0.456,0.406), (0.229,0.224,0.225))
 ])
 if __name__ == "__main__":
-    dataset = ListDataset(root="/home/wushuanchen/datasets/xu_tian",
-     list_file='/home/wushuanchen/PycharmProjects/pytorch-retinanet-master/data/simulate_train.txt', train=True, transform=transform, input_size=600)
+    dataset = ListDataset(root="/home/wushuanchen/datasets/voc",
+     list_file='/home/wushuanchen/PycharmProjects/pytorch-retinanet-master/data/voc2012_train.txt', train=True, transform=transform, input_size=600)
     dataloader = torch.utils.data.DataLoader(dataset, batch_size=8, shuffle=False, num_workers=1)#, collate_fn=dataset.collate_fn)
     for step, (images, loc_targets, cls_targets,_) in enumerate(dataloader):
         for i, image in enumerate(images):
