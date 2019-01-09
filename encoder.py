@@ -8,7 +8,7 @@ from utils import meshgrid, box_iou, box_nms, change_box_order
 class DataEncoder:
     def __init__(self):
         # self.anchor_areas = [32*32., 64*64., 128*128., 256*256., 512*512.]  # p3 -> p7
-        self.anchor_areas=[32*32., 48*48., 96*96., 192*192., 384*384.]
+        self.anchor_areas=[24*24., 48*48., 96*96., 192*192., 384*384.]
         self.aspect_ratios = [1/2., 1/1., 2/1.]
         self.scale_ratios = [1., pow(2,1/3.), pow(2,2/3.)]
         self.anchor_wh = self._get_anchor_wh()
