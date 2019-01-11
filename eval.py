@@ -1,5 +1,5 @@
 '''
-evaluate tools for voc and coco
+evaluate tools for voc
 '''
 #voc for evaluate tool
 import torch
