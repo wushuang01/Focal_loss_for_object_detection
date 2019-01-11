@@ -82,18 +82,6 @@ def voc_ap(rec, prec, use_07_metric=False):
         # and sum (\Delta recall) * prec
         ap = np.sum((mrec[i + 1] - mrec[i]) * mpre[i + 1])
     return ap
-def evaluate_for_voc():
-    print('loading model....')
-    net = RetinaNet()
-    net.load_state_dict(torch.load('checkpoint/ckpt.pth')['net'])
-    net.eval()
-    for batch_idx, (inputs, loc_targets, cls_targets) in enumerate(testloader):
-        inputs = inputs.cuda()
-        loc_targets = loc_targets.cuda()
-        loc_preds, cls_preds = net(inputs)
-        boxes, labels = encoder.decode(loc_preds.data.squeeze(), cls_preds.data.squeeze(), (w, h))
-
-
 
 def voc_eval(detpath,
              annopath,
@@ -159,7 +147,7 @@ def voc_eval(detpath,
     image_ids = [x[0] for x in splitlines]
     confidence = np.array([float(x[1]) for x in splitlines])
     BB = np.array([[float(z) for z in x[2:]] for x in splitlines])
-
+    BB=np.clip(BB,a_min=0,a_max=w)
     # sort by confidence
     sorted_ind = np.argsort(-confidence)
     sorted_scores = np.sort(-confidence)
@@ -248,6 +236,10 @@ def test():
         loc_preds, cls_preds = net(inputs)
         print('Decoding..')
         boxes, labels,scores = encoder.decode(loc_preds.data, cls_preds.data, (w, h))
+
+        boxes=boxes.unsqueeze(0)
+        labels=labels.unsqueeze(0)
+        scores=scores.unsqueeze(0)
         for index in range(batch_sizes):
             file_name=fname[index]
             try:
@@ -258,12 +250,12 @@ def test():
                 continue
             label=labels[index]
             score=scores[index]
-            try:
-                tmp=box[0,:]
-            except:
-                box=box.unsqueeze(0)
-                label=label.unsqueeze(0)
-                score=score.unsqueeze(0)
+            # try:
+            #     tmp=box[0,:]
+            # except:
+            #     box=box.unsqueeze(0)
+            #     label=label.unsqueeze(0)
+            #     score=score.unsqueeze(0)
             for i,bb in enumerate(box):
                 if(label[i].item() in the_det_file.keys()):
                     # print(the_classes[int(label[i].item())])

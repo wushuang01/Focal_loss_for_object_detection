@@ -106,7 +106,7 @@ class DataEncoder:
           boxes: (tensor) decode box locations, sized [#obj,4].
           labels: (tensor) class labels for each box, sized [#obj,].
         '''
-        CLS_THRESH = 0.4
+        CLS_THRESH = 0.3
         NMS_THRESH = 0.4
 
         input_size = torch.Tensor([input_size,input_size]) if isinstance(input_size, int) \
