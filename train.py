@@ -35,12 +35,12 @@ transform = transforms.Compose([
     transforms.Normalize((0.485,0.456,0.406), (0.229,0.224,0.225))
 ])
 
-trainset = ListDataset(root='/home/wushuanchen/datasets/voc/VOC2012/JPEGImages',
-                       list_file='data/voc12_train.txt', train=True, transform=transform, input_size=384)
+trainset = ListDataset(root='/home/wushuanchen/datasets/voc/VOC2007/JPEGImages',
+                       list_file='data/voc07_train.txt', train=True, transform=transform, input_size=512)
 trainloader = torch.utils.data.DataLoader(trainset, batch_size=8, shuffle=True, num_workers=8, collate_fn=trainset.collate_fn)
 
 testset = ListDataset(root='/home/wushuanchen/datasets/voc/VOC2012/JPEGImages',
-                      list_file='./data/voc12_val.txt', train=False, transform=transform, input_size=384)
+                      list_file='./data/voc12_val.txt', train=False, transform=transform, input_size=512)
 testloader = torch.utils.data.DataLoader(testset, batch_size=16, shuffle=False, num_workers=8, collate_fn=testset.collate_fn)
 
 # Model

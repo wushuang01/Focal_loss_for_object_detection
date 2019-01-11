@@ -23,19 +23,17 @@ def parse_rec(filename):
     return objects
 import os
 the_classes=[c.strip() for c in open('/home/wushuanchen/PycharmProjects/pytorch-retinanet-master/data/voc.names').readlines()]
-f=open('/home/wushuanchen/PycharmProjects/pytorch-retinanet-master/data/voc12_train.txt','w')
-the_root_path='/home/wushuanchen/datasets/voc/VOC2012/ImageSets/Main/train.txt'
+f=open('/home/wushuanchen/PycharmProjects/pytorch-retinanet-master/data/voc07_test.txt','w')
+the_root_path='/home/wushuanchen/datasets/voc/VOC2007/ImageSets/Main/test.txt'
 val_imgs=open(the_root_path,'r').readlines()
 val_imgs=[val_img.strip() for val_img in val_imgs]
 for img in val_imgs:
-    filename='/home/wushuanchen/datasets/voc/VOC2012/Annotations/%s.xml'%(img)
+    filename='/home/wushuanchen/datasets/voc/VOC2007/Annotations/%s.xml'%(img)
     img_name='%s.jpg'%(img)
     objects=parse_rec(filename)
     the_write_list=[img_name]
     for object in objects:
         object_class=str(the_classes.index(object['name']))
-        width=object['width']
-        height=object['height']
         bbox = [str(box) for box in object['bbox']]
         the_write_list.extend(bbox)
         the_write_list.append(object_class)

@@ -24,7 +24,7 @@ for i in os.listdir('image'):
     img = Image.open(os.path.join('image',i))
     if img.mode != 'RGB':
         img = img.convert('RGB')
-    w = h = 384
+    w = h = 512
     img = img.resize((w,h))
     # img.save(os.path.join('output', i))
     print('Predicting..')

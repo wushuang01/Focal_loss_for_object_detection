@@ -86,7 +86,7 @@ class ListDataset(data.Dataset):
         # Data augmentation.
         if self.train:
             img, boxes = random_flip(img, boxes)
-            # img, boxes = random_crop(img, boxes)
+            img, boxes = random_crop(img, boxes)
             img, boxes = resize(img, boxes, (size,size))
         else:
            img, boxes = resize(img, boxes, (size,size))

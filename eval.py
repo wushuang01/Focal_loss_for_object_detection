@@ -28,10 +28,10 @@ def parse_rec(filename):
         bbox = obj.find('bndbox')
         obj_struct['height'] = float(size_info.find('height').text)
         obj_struct['width'] = float(size_info.find('width').text)
-        obj_struct['bbox'] = [384*float(bbox.find('xmin').text) / obj_struct['width'],
-                              384*float(bbox.find('ymin').text) / obj_struct['height'],
-                              384*float(bbox.find('xmax').text) / obj_struct['width'],
-                              384*float(bbox.find('ymax').text) / obj_struct['height']]
+        obj_struct['bbox'] = [512*float(bbox.find('xmin').text) / obj_struct['width'],
+                              512*float(bbox.find('ymin').text) / obj_struct['height'],
+                              512*float(bbox.find('xmax').text) / obj_struct['width'],
+                              512*float(bbox.find('ymax').text) / obj_struct['height']]
         objects.append(obj_struct)
 
     return objects
@@ -226,7 +226,7 @@ transform = transforms.Compose([
     transforms.Normalize((0.485,0.456,0.406), (0.229,0.224,0.225))
 ])
 testset = ListDataset(root='/home/wushuanchen/datasets/voc/VOC2012/JPEGImages',
-                      list_file='./data/voc12_val.txt', train=False, transform=transform, input_size=384)
+                      list_file='./data/voc12_val.txt', train=False, transform=transform, input_size=512)
 
 testloader = torch.utils.data.DataLoader(testset, batch_size=batch_sizes, shuffle=False, num_workers=8, collate_fn=testset.collate_fn)
 
@@ -241,7 +241,7 @@ net=net.cuda()
 
 the_classes=[c.strip() for c in open('data/voc.names').readlines()]
 
-w=h=384
+w=h=512
 def test():
     the_det_file = {}
     for batch_idx, (inputs, loc_targets, cls_targets,fname) in enumerate(testloader):
@@ -289,7 +289,3 @@ def eval():
 
 test()
 eval()
-
-
-
-
