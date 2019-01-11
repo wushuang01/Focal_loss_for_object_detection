@@ -281,8 +281,8 @@ def test():
     #calculate mAP respectively
 def eval():
     det_path='detection_result/%s.txt'
-    annotation_path='/home/wushuanchen/datasets/voc/VOC2012/Annotations/%s.xml'
-    imagesetfile='/home/wushuanchen/datasets/voc/VOC2012/ImageSets/Main/%s_val.txt'
+    annotation_path='/home/wushuanchen/datasets/voc/VOC2007/Annotations/%s.xml'
+    imagesetfile='/home/wushuanchen/datasets/voc/VOC2007/ImageSets/Main/%s_val.txt'
     for class_name in the_classes:
         rec, prec, ap=voc_eval(det_path,annotation_path,imagesetfile%(class_name),class_name)
         print('%s AP: %f'%(class_name,ap))
