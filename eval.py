@@ -240,7 +240,6 @@ net=net.cuda()
 
 
 the_classes=[c.strip() for c in open('data/voc.names').readlines()]
-
 w=h=512
 def test():
     the_det_file = {}
@@ -282,7 +281,7 @@ def test():
 def eval():
     det_path='detection_result/%s.txt'
     annotation_path='/home/wushuanchen/datasets/voc/VOC2007/Annotations/%s.xml'
-    imagesetfile='/home/wushuanchen/datasets/voc/VOC2007/ImageSets/Main/%s_val.txt'
+    imagesetfile='/home/wushuanchen/datasets/voc/VOC2007/ImageSets/Main/%s_test.txt'
     for class_name in the_classes:
         rec, prec, ap=voc_eval(det_path,annotation_path,imagesetfile%(class_name),class_name)
         print('%s AP: %f'%(class_name,ap))
