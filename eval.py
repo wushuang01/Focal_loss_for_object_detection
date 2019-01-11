@@ -225,8 +225,8 @@ transform = transforms.Compose([
     transforms.ToTensor(),
     transforms.Normalize((0.485,0.456,0.406), (0.229,0.224,0.225))
 ])
-testset = ListDataset(root='/home/wushuanchen/datasets/voc/VOC2012/JPEGImages',
-                      list_file='./data/voc12_val.txt', train=False, transform=transform, input_size=512)
+testset = ListDataset(root='/home/wushuanchen/datasets/voc/VOC2007/JPEGImages',
+                      list_file='./data/voc07_test.txt', train=False, transform=transform, input_size=512)
 
 testloader = torch.utils.data.DataLoader(testset, batch_size=batch_sizes, shuffle=False, num_workers=8, collate_fn=testset.collate_fn)
 
