@@ -3,7 +3,7 @@ Train _RetinaNet_ with _Focal Loss_ in PyTorch.
 Reference:  
 [1] [Focal Loss for Dense Object Detection](https://arxiv.org/abs/1708.02002)
 
-**Imporvements**
+**Imporvements:**
 
 **Add the eval.py to calculate mAP on VOC.**
 
@@ -13,3 +13,5 @@ Reference:
 
 **Results**:
 mAP: **69.0 points** on VOC2007_trainval datasets.
+
+
