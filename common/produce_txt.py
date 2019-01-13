@@ -22,13 +22,13 @@ def parse_rec(filename):
 
     return objects
 import os
-the_classes=[c.strip() for c in open('/home/wushuanchen/PycharmProjects/pytorch-retinanet-master/data/voc.names').readlines()]
-f=open('/home/wushuanchen/PycharmProjects/pytorch-retinanet-master/data/voc07_test.txt','w')
-the_root_path='/home/wushuanchen/datasets/voc/VOC2007/ImageSets/Main/test.txt'
+the_classes=[c.strip() for c in open('data/voc.names').readlines()]
+f=open('=data/voc07_test.txt','w')
+the_root_path='datasets/voc/VOC2007/ImageSets/Main/test.txt'
 val_imgs=open(the_root_path,'r').readlines()
 val_imgs=[val_img.strip() for val_img in val_imgs]
 for img in val_imgs:
-    filename='/home/wushuanchen/datasets/voc/VOC2007/Annotations/%s.xml'%(img)
+    filename='datasets/voc/VOC2007/Annotations/%s.xml'%(img)
     img_name='%s.jpg'%(img)
     objects=parse_rec(filename)
     the_write_list=[img_name]
